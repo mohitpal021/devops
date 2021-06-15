@@ -1,0 +1,25 @@
+---
+ - hosts: all
+   gather_facts: false
+   become: true
+   become_user: root
+   tasks:
+   - debug:
+          msg: "deployment start"
+   - shell: whoami
+     register: sys
+   - debug:
+        msg: "Ansible user is {{sys.stdout}}"
+   - name: Shuting down tomcat8
+     command: "nohup /opt/apache-tomcat-8.5.66/bin/shutdown.sh"
+   - name: Unzip WAR file and restart Tomcat service
+     unarchive: 
+         src: /apps/workspace/Jenkins_CI/webapp/target/webapp.war
+         dest: /opt/apache-tomcat-8.5.66/webapps/ROOT/ 
+         copy: no 
+         mode: 0755 
+   - name: wait
+     shell: sleep 5
+   - name: Starting up tomcat8
+     command: "nohup /opt/apache-tomcat-8.5.66/bin/startup.sh"
+         
