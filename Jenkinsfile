@@ -6,5 +6,10 @@ pipeline {
                 bat 'ipconfig'
             }
         }
+        stage("test2"){
+            steps {
+                bat "hostname"
+            }
+        }
     } 
 }
