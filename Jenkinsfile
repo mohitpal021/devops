@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage("Test"){
+        stage("test"){
             steps {
                 bat 'Write-Host "Hello world!"'
             }
