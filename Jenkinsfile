@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("test"){
             steps {
-                bat 'Write-Host "Hello world!"'
+                bat 'write-Host "Hello world!"'
             }
         }
     } 
